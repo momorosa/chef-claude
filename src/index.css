@@ -1,0 +1,101 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  font-family: Inter, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #000000;
+  background-color: #E3E0D0;
+}
+
+header {
+  display: flex;
+  width: 100%;
+  height: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  background-image: url('./assets/headerBG.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  
+}
+
+.logo {
+  width: 60px;
+  
+}
+
+.header > span {
+  font-size: 1.7rem;
+  
+}
+
+.intro {
+  margin: 0 20%;
+  font-weight: 400;
+  text-align: center;
+}
+
+main {
+  padding: 10px 30px;
+}
+
+.add-ingredient-form {
+  /* min-width: 680px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.add-ingredient-form > input {
+  border-radius:  6px;
+  border: 1px solid #D1D5DB;
+  padding: 13px;
+  box-shadow: 0px 1px 2px 0px rbga(0, 0, 0, 0.05);
+  flex-grow: 1;
+  min-width: 150px;
+  max-width: 400px;
+}
+
+.add-ingredient-form > button {
+  font-family: Inter, sans-serif;
+  border-radius: 8px;
+  border: none;
+  background-color: #000000;
+  color: #FFFFFF;
+  padding: 12px 24px;
+  cursor: pointer;
+}
+
+.add-ingredient-form > button::before {
+  content: "+";
+  margin-right: 4px;
+}
+
+.add-ingredient-form > button:hover {
+  background-color: rgba(0, 0, 0, 0.8)
+}
+
+.add-ingredient-form > button:focus,
+.add-ingredient-form > button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.ingredient-on-hand {
+  margin-left: 30%;
+  min-width: 150px;
+  max-width: 400px;
+} 
+
+li {
+  text-transform: capitalize;
+}
