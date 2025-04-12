@@ -49,7 +49,6 @@ main {
 }
 
 .add-ingredient-form {
-  /* min-width: 680px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -74,6 +73,7 @@ main {
   color: #FFFFFF;
   padding: 12px 24px;
   cursor: pointer;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
 }
 
 .add-ingredient-form > button::before {
@@ -98,4 +98,38 @@ main {
 
 li {
   text-transform: capitalize;
+}
+
+.get-recipe-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  background: #F0EFEB;
+  padding: 8px 24px;
+  width: 560px;
+}
+
+.get-recipe-container h3 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.get-recipe-container p {
+  color: #6B7280;
+  font-size: 0.875rem;
+  line-height: 20px;
+}
+
+.get-recipe-container button {
+  border: none;
+  border-radius: 8px;
+  background: #E3B13E;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+  padding: 9px 17px;
+  font-family: Inter, sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  cursor: pointer;
 }
