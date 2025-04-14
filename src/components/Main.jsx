@@ -1,21 +1,17 @@
 import { useState } from 'react'
 import ClaudeRecipe from './ClaudeRecipe.jsx'
 import IngredientsList from './IngredientsList.jsx'
-// import IngredientsList from './IngredientsList.jsx'
+import { fetchRecipe } from '../fetchAPI.js'
 
 export default function Main()
 {
     const [ ingredients, setIngredients ] = useState([])
+    const [ recipe, setRecipe ] = useState("")
 
-    const ingredientListItems = ingredients.map(ingredient => (
-        <li key={ ingredient }>{ ingredient }</li>
-    ))
-
-    const [ recipeShown, setRecipeShown ] = useState(false)
-
-    function toggleRecipeShown()
+    async function getRecipe()
     {
-        setRecipeShown(prevRecipeShown => !prevRecipeShown)
+        const recipeMarkdown = await fetchRecipe(ingredients)
+        setRecipe(recipeMarkdown)
     }
 
     function addIngredient(formData) 
@@ -25,7 +21,7 @@ export default function Main()
 
         // If the input is empty, return early without updating state.
         if (newIngredient === "") { return }
-        setIngredients(prevIngredeints => [ ...prevIngredeints, newIngredient ])
+        setIngredients(prevIngredients => [ ...prevIngredients, newIngredient ])
     }
 
     return(
@@ -42,9 +38,9 @@ export default function Main()
             { ingredients.length > 0 && 
             <IngredientsList 
                 ingredients = { ingredients } 
-                toggleRecipeShown={ toggleRecipeShown }
+                getRecipe={ getRecipe }
             />}
-            {recipeShown && <ClaudeRecipe />}
+            {recipe && <ClaudeRecipe recipe={ recipe }/>}
         </main>
     )
 }
