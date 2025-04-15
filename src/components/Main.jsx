@@ -8,11 +8,11 @@ export default function Main()
     const [ ingredients, setIngredients ] = useState([])
     const [ recipe, setRecipe ] = useState("")
 
-    async function getRecipe()
-    {
+    async function getRecipe() {
         const recipeMarkdown = await fetchRecipe(ingredients)
+        // console.log(recipeMarkdown) // or set it to state for rendering
         setRecipe(recipeMarkdown)
-    }
+      }
 
     function addIngredient(formData) 
     {

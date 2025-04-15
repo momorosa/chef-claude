@@ -1,4 +1,4 @@
-import Anthropic from "@anthropic-ai/sdk";
+import Anthropic from "@anthropic-ai/sdk"
 
 const SYSTEM_PROMPT = `
 You are a friendly, slightly cheeky recipe assistant. A user will give you a list of ingredients they have on hand. Your job is to suggest a tasty recipe they can make using some or most of those ingredients—no pressure to use *everything* (we're not trying to summon a kitchen monster here).
@@ -16,42 +16,57 @@ Ready, chef?
 `;
 
 export default async function handler(req, res) {
+  // Only accept POST requests
   if (req.method !== "POST") {
-    res.status(405).json({ message: "Method not allowed" });
-    return;
+    res.status(405).json({ message: "Method not allowed" })
+    return
   }
 
-  try {
-    const { ingredients } = req.body; // ingredients should be an array
+  // Manually read the request body
+  let rawBody = "";
+  req.on("data", chunk => {
+    rawBody += chunk
+  })
 
-    if (!ingredients || !Array.isArray(ingredients)) {
-      res.status(400).json({ message: "Invalid ingredients" });
-      return;
+  req.on("end", async () => {
+    try {
+      // Optionally, log the raw request body for debugging
+      // console.log("Raw request body:", rawBody)
+
+      // Parse the JSON body
+      const { ingredients } = JSON.parse(rawBody)
+
+      if (!ingredients || !Array.isArray(ingredients)) {
+        res.status(400).json({ message: "Invalid ingredients" })
+        return
+      }
+
+      const ingredientsString = ingredients.join(", ")
+
+      const anthropic = new Anthropic({
+        apiKey: process.env.ANTHROPIC_API_KEY,
+        // Keep it false since this is running server-side
+        dangerouslyAllowBrowser: false,
+      })
+
+      const msg = await anthropic.messages.create({
+        model: "claude-3-haiku-20240307",
+        max_tokens: 1024,
+        system: SYSTEM_PROMPT,
+        messages: [
+          {
+            role: "user",
+            content: `I have ${ingredientsString}. Please give me a recipe you'd recommend I make!`,
+          },
+        ],
+      })
+
+      console.log("Anthropic response:", msg)
+
+      res.status(200).json({ recipe: msg.content[0].text })
+    } catch (error) {
+      console.error("Error fetching recipe:", error.message, error.stack)
+      res.status(500).json({ error: "Error generating recipe" })
     }
-
-    const ingredientsString = ingredients.join(", ");
-
-    const anthropic = new Anthropic({
-      apiKey: process.env.ANTHROPIC_API_KEY,
-      // Since this code is running server-side, you can remove the browser flag.
-      dangerouslyAllowBrowser: false,
-    });
-
-    const msg = await anthropic.messages.create({
-      model: "claude-3-haiku-20240307",
-      max_tokens: 1024,
-      system: SYSTEM_PROMPT,
-      messages: [
-        {
-          role: "user",
-          content: `I have ${ingredientsString}. Please give me a recipe you'd recommend I make!`,
-        },
-      ],
-    });
-
-    res.status(200).json({ recipe: msg.content[0].text });
-  } catch (error) {
-    console.error("Error fetching recipe:", error);
-    res.status(500).json({ error: "Error generating recipe" });
-  }
+  });
 }
