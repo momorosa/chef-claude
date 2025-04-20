@@ -7,6 +7,7 @@ export default function Main()
 {
     const [ ingredients, setIngredients ] = useState([])
     const [ recipe, setRecipe ] = useState("")
+    const isFloating = ingredients.length > 0
 
     async function getRecipe() {
         const recipeMarkdown = await fetchRecipe(ingredients)
@@ -26,15 +27,18 @@ export default function Main()
 
     return(
         <main>
-            <form action={ addIngredient } className="add-ingredient-form">
-                <input 
-                    type="text" 
-                    placeholder="e.g. spinach"
-                    aria-label="Add ingredient"
-                    name="ingredient"
-                />
-                <button>Add ingredient</button>
-            </form>
+            <div className="intro">Enter 5 ingredients you have at home, and let Chef Claude suggest a delicious recipe complete with easy-to-follow cooking instructions!</div>
+            <div className={`input-wrapper ${isFloating ? 'fixed-bottom' : ''}`}>
+                <form action={ addIngredient } className="add-ingredient-form">
+                    <input 
+                        type="text" 
+                        placeholder="e.g. spinach"
+                        aria-label="Add ingredient"
+                        name="ingredient"
+                    />
+                    <button>Add ingredient</button>
+                </form>
+            </div>
             { ingredients.length > 0 && 
             <IngredientsList 
                 ingredients = { ingredients } 

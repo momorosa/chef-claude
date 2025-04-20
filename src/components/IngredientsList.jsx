@@ -6,8 +6,8 @@ export default function IngredientsList({ ingredients, getRecipe })
 
     return(
         <section className="ingredient-on-hand">
-            <h2>Ingredients on hand:</h2>
-            <ul className="inredients-list" aria-live="polite">{ ingredientListItems }</ul>
+            <div><h2>Ingredients on hand:</h2></div>
+            <ul className="ingredients-list" aria-live="polite">{ ingredientListItems }</ul>
             { ingredients.length > 4 && <div className="get-recipe-container">
                 <div>
                     <h3>Ready for a recipe?</h3>
