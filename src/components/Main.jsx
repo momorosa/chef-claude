@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import ClaudeRecipe from './ClaudeRecipe.jsx'
 import IngredientsList from './IngredientsList.jsx'
 import { fetchRecipe } from '../fetchAPI.js'
@@ -7,10 +7,18 @@ export default function Main()
 {
     const [ ingredients, setIngredients ] = useState([])
     const [ recipe, setRecipe ] = useState("")
+    const recipeSection = useRef(null)
+
+    useEffect(() => {
+        if(recipe !== "" && recipeSection.current !== null) {
+            setTimeout(()=> {
+                recipeSection.current.scrollIntoView({ behavior: "smooth" })
+            }, 100)
+        }
+    },[recipe])
 
     async function getRecipe() {
         const recipeMarkdown = await fetchRecipe(ingredients)
-        // console.log(recipeMarkdown) // or set it to state for rendering
         setRecipe(recipeMarkdown)
       }
 
@@ -23,6 +31,11 @@ export default function Main()
         if (newIngredient === "") { return }
         setIngredients(prevIngredients => [ ...prevIngredients, newIngredient ])
     }
+
+    function handleResetApp() {
+        setIngredients([]);
+        setRecipe(null);
+      }
 
     return(
         <main>
@@ -37,13 +50,19 @@ export default function Main()
                     />
                     <button>Add ingredient</button>
                 </form>
+                <footer>©2025 Rosa Choi • Crafted by momorosa</footer>
             </div>
             { ingredients.length > 0 && 
             <IngredientsList 
                 ingredients = { ingredients } 
-                getRecipe={ getRecipe }
+                getRecipe = { getRecipe }
             />}
-            {recipe && <ClaudeRecipe recipe={ recipe }/>}
+            {recipe && <ClaudeRecipe ref={ recipeSection } recipe={ recipe }/>}
+            {recipe && <div className="reset">
+                <button className="start-over-button" onClick={handleResetApp}>
+                    Start a new recipe
+                </button>
+            </div>}
         </main>
     )
 }
