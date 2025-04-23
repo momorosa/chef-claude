@@ -174,8 +174,9 @@ li {
   line-height: 20px;
 }
 
-.get-recipe-container > button,
+.get-recipe-btn,
 .start-over-button {
+  color:#000000;
   border: none;
   border-radius: 8px;
   background: #E3B13E;
@@ -187,17 +188,22 @@ li {
   cursor: pointer;
 }
 
-.get-recipe-container > button:hover,
+.get-recipe-btn:hover,
 .start-over-button:hover {
   background-color: #E3B13E98;
 }
 
-
-.get-recipe-container > button:focus,
-.get-recipe-container > button:focus-visible, 
+.get-recipe-btn:focus,
+.get-recipe-btn:focus-visible, 
 .start-over-button:focus,
 .start-over-button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+get-recipe-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .spinner {

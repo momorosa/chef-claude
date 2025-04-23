@@ -9,7 +9,6 @@ export default forwardRef(function ClaudeRecipe({ recipe }, ref) {
 
     function toggleFavorite() {
         setFavorite(prev => !prev)
-
     }
 
     return (

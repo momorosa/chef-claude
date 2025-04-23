@@ -20,7 +20,8 @@ export default function Main()
     async function getRecipe() {
         const recipeMarkdown = await fetchRecipe(ingredients)
         setRecipe(recipeMarkdown)
-      }
+        return Promise.resolve()
+    }
 
     function addIngredient(formData) 
     {
@@ -33,8 +34,8 @@ export default function Main()
     }
 
     function handleResetApp() {
-        setIngredients([]);
-        setRecipe(null);
+        setIngredients([])
+        setRecipe(null)
       }
 
     return(
