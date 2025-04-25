@@ -3,7 +3,6 @@ Chef Claude is an AI-powered recipe assistant that takes the guesswork and menta
 
 This project was built as a way to practice building full-featured UIs using React and deploying serverless applications via Vercel, while integrating Anthropic's Claude API for AI-powered text generation.
 
---
 ## ✨ Features
 
 • Input Validation – No invisible or blank ingredients allowed
@@ -18,7 +17,6 @@ This project was built as a way to practice building full-featured UIs using Rea
 
 • Deployed Serverless – Hosted on Vercel
 
---
 ## 🤖 Tech Stack
 
 • React (Frontend UI)
@@ -28,7 +26,6 @@ This project was built as a way to practice building full-featured UIs using Rea
 • Custom React Hook (Claude's rotating loading messages)
 • CSS3 (Styling and animations)
 
---
 ## 🎯 Project Goals
 
 • Move beyond CLI-based AI projects to intuitive web-based experiences
@@ -36,13 +33,11 @@ This project was built as a way to practice building full-featured UIs using Rea
 • Practice serverless deployment with Vercel
 • Build faster, low-friction prototypes that people enjoy using
 
---
 ## 🖥️ Demo
 
 Because this project uses a private API key for Anthropic's Claude, the live link is not publicly available.
 👉 [Click here to watch the video demo!](https://vimeo.com/1078803467?share=copy#t=0)
 
---
 ## 🚀 Getting Started (For Developers)
 
 > **Note:** Due to private API key usage, this app cannot be fully cloned and run without setting up your own Anthropic API key.
@@ -61,7 +56,6 @@ Because this project uses a private API key for Anthropic's Claude, the live lin
 
 5. Open http://localhost:5173 in your browser to view it.
 
---
 ### 💛 Acknowledgement
 • Built while learning React with Bob Ziroll’s [Scrimba Learn React] (https://scrimba.com/learn-react-c0e)
 
