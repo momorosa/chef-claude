@@ -78,5 +78,5 @@ npm run dev
 
 ## 💛 Acknowledgement:
 
-• Built while learning React with Bob Ziroll’s [Scrimba Learn React] (https://scrimba.com/learn-react-c0e)
+• Built while learning React with Bob Ziroll’s [Scrimba Learn React](https://scrimba.com/learn-react-c0e)
 
